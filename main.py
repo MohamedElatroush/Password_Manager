@@ -13,12 +13,12 @@ def find_password():
     except FileNotFoundError:
         messagebox.showinfo(title="Opps", message="No Data File Found.")
     else:
-        try:
-            data = load_data[website_entry.get()]
-        except KeyError:
-            messagebox.showinfo(title="Opps", message="No details for the website exist.")
+        if website_entry.get() in load_data:
+            messagebox.showinfo(title="Found",
+                                message=f"Website: {website_entry.get()} was found\nEmail: {load_data[website_entry.get()]['email']}\nPassword: {load_data[website_entry.get()]['password']}")
+
         else:
-            messagebox.showinfo(title="Found", message=f"Website: {website_entry.get()} was found\nEmail: {data['email']}\nPassword: {data['password']}")
+            messagebox.showinfo(title="Opps", message="No details for the website exist.")
 
 
 
